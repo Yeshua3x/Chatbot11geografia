@@ -1,0 +1,17 @@
+[
+    {
+        "question": "Qual é a capital da França?",
+        "answer": "A capital da França é Paris.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_Night.jpg"
+    },
+    {
+        "question": "Qual é o rio mais longo do mundo?",
+        "answer": "O rio mais longo do mundo é o Rio Amazonas.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Rio_Amazonas.jpg"
+    },
+    {
+        "question": "Qual é o continente mais populoso?",
+        "answer": "O continente mais populoso é a Ásia.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Asia_map.png"
+    }
+]
