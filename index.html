@@ -108,20 +108,9 @@
         });
 
         function findAnswer(userQuestion) {
-            const keywords = {
-                "capital da frança": questionsData[0],
-                "capital": questionsData[0],
-                "qual é a capital da frança": questionsData[0],
-                "qual é a capital": questionsData[0],
-                "rio mais longo": questionsData[1],
-                "qual é o rio mais longo": questionsData[1],
-                "continente mais populoso": questionsData[2],
-                "qual é o continente mais populoso": questionsData[2],
-            };
-
-            for (const key in keywords) {
-                if (userQuestion.includes(key)) {
-                    return keywords[key];
+            for (const item of questionsData) {
+                if (item.keywords.some(keyword => userQuestion.includes(keyword.toLowerCase()))) {
+                    return item;
                 }
             }
 
