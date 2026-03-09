@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot de Geografia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #chatbox {
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        #messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .message {
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .user {
+            background-color: #d1f0d1;
+            text-align: right;
+        }
+        .bot {
+            background-color: #f0d1d1;
+            text-align: left;
+        }
+        #question {
+            width: calc(100% - 82px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #send {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <input type="text" id="question" placeholder="Faça uma pergunta sobre geografia...">
+        <button id="send">Enviar</button>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('data.json');
+            return await response.json();
+        }
+
+        let questionsData = [];
+
+        fetchData().then(data => {
+            questionsData = data;
+        });
+
+        document.getElementById('send').addEventListener('click', function() {
+            const questionInput = document.getElementById('question');
+            const userQuestion = questionInput.value.trim();
+
+            if (userQuestion) {
+                addMessage(userQuestion, 'user');
+                questionInput.value = '';
+
+                const found = questionsData.find(q => q.question.toLowerCase() === userQuestion.toLowerCase());
+
+                if (found) {
+                    addMessage(found.answer, 'bot');
+                    addImage(found.image);
+                } else {
+                    addMessage("Desculpe, não sei a resposta para isso.", 'bot');
+                }
+            }
+        });
+
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerText = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto scroll
+        }
+
+        function addImage(src) {
+            const messagesDiv = document.getElementById('messages');
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.width = '100%';
+            img.style.borderRadius = '5px';
+            messagesDiv.appendChild(img);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto scroll
+        }
+    </script>
+</body>
+</html>
