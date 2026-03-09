@@ -3,60 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot de Geografia</title>
+    <title>Chatbot de Geografia Moderno</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
             margin: 0;
             padding: 20px;
         }
         #chatbox {
-            background: white;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             margin: auto;
+            overflow: hidden;
         }
         #messages {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
             margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #e8f1fa;
         }
         .message {
-            padding: 5px;
+            padding: 10px;
             margin: 5px 0;
+            border-radius: 10px;
+            max-width: 80%;
         }
         .user {
             background-color: #d1f0d1;
-            text-align: right;
+            align-self: flex-end;
+            margin-left: auto;
         }
         .bot {
             background-color: #f0d1d1;
-            text-align: left;
+        }
+        #inputArea {
+            display: flex;
+            margin-top: 10px;
         }
         #question {
-            width: calc(100% - 82px);
+            flex: 1;
             padding: 10px;
-            border-radius: 5px;
             border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
         }
         #send {
-            padding: 10px;
+            padding: 10px 15px;
             border: none;
             background-color: #007bff;
             color: white;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #send:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div id="chatbox">
         <div id="messages"></div>
-        <input type="text" id="question" placeholder="Faça uma pergunta sobre geografia...">
-        <button id="send">Enviar</button>
+        <div id="inputArea">
+            <input type="text" id="question" placeholder="Faça uma pergunta sobre geografia..." />
+            <button id="send">Enviar</button>
+        </div>
     </div>
 
     <script>
@@ -85,7 +102,7 @@
                     addMessage(found.answer, 'bot');
                     addImage(found.image);
                 } else {
-                    addMessage("Desculpe, não sei a resposta para isso.", 'bot');
+                    addMessage("Não sei.", 'bot');
                 }
             }
         });
@@ -104,7 +121,7 @@
             const img = document.createElement('img');
             img.src = src;
             img.style.width = '100%';
-            img.style.borderRadius = '5px';
+            img.style.borderRadius = '10px';
             messagesDiv.appendChild(img);
             messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto scroll
         }
